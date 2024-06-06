@@ -16,7 +16,7 @@ resource "vcd_catalog_item" "demo_linux" {
   name        = "photon-hw11"
   description = "Linux VM photon-hw11"
 
-  ova_path = "/home/serhii/Downloads/photon-hw11-3.0-26156e2.ova"
+  ova_path = "/path/to/file.ova"
 
   upload_piece_size    = 10
   show_upload_progress = true
@@ -26,7 +26,7 @@ resource "vcd_catalog_item" "demo_linux" {
 
 data "vcd_nsxt_edgegateway" "existing" {
   #org  = var.org_name
-  name = "creatio_temp PrimeVDC Edge AT2"
+  name = "NAME_YOUR_EDGEGATEWAY"
 }
 
 resource "vcd_network_routed_v2" "net_r_v2" {

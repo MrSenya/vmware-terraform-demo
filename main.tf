@@ -25,13 +25,11 @@ resource "vcd_catalog_item" "demo_linux" {
 # Note: all resources are created inside a NSX-T VDC
 
 data "vcd_nsxt_edgegateway" "existing" {
-  #org  = var.org_name
   name = "NAME_YOUR_EDGEGATEWAY"
 }
 
 resource "vcd_network_routed_v2" "net_r_v2" {
-  name = "net_r_v2"
-  #org             = var.org_name
+  name            = "net_r_v2"
   edge_gateway_id = data.vcd_nsxt_edgegateway.existing.id
   gateway         = "10.10.102.1"
   prefix_length   = 24
@@ -44,7 +42,6 @@ resource "vcd_network_routed_v2" "net_r_v2" {
 
 resource "vcd_network_isolated_v2" "net_i_v2" {
   name = "net_i_v2"
-  #org  = var.org_name
 
   gateway       = "110.10.102.1"
   prefix_length = 26
@@ -56,8 +53,6 @@ resource "vcd_network_isolated_v2" "net_i_v2" {
 }
 
 resource "vcd_nsxt_network_dhcp" "net_r_dhcp" {
-  #org = var.org_name
-
   org_network_id = vcd_network_routed_v2.net_r_v2.id
 
   pool {
@@ -104,8 +99,6 @@ variable "static_ips" {
 }
 
 resource "vcd_vapp_vm" "standaloneVm" {
-  #org           = var.org_name
-  #vdc           = var.org_vdc
   vapp_name        = vcd_vapp.demo_vapp.name
   name             = "standaloneVm-${count.index}"
   computer_name    = "standaloneVm-unique-${count.index}"
